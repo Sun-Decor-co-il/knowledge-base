@@ -1,8 +1,12 @@
 ---
 id: "{{title}}"
 title: Template
-status: "#draft #approved #deprecated #archived"
-date:
+status:
+  - "#draft"
+  - "#approved"
+  - "#deprecated"
+  - "#archived"
+date: "{{date}}, {{time}}"
 tags:
   - adr
   - architecture

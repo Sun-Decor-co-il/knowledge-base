@@ -1,0 +1,15 @@
+# Системные папки Obsidian
+.obsidian/workspace.json
+.obsidian/graph.json
+.obsidian/sync/
+.obsidian/plugins/obsidian-git/
+
+# Кеш и временные файлы операционных систем
+.DS_Store
+Thumbs.db
+*.tmp
+
+# Опционально: Кэш плагинов (если они вызывают конфликты)
+.obsidian/.trash/
+.obsidian/plugins/*/.git
+
