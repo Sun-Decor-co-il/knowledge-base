@@ -1,125 +1,385 @@
 ---
-id: ADR-0014
-title: Engineering Platform Architecture как главный архитектурный документ инженерной платформы
+id: EPA-0001
+title: Engineering Platform Architecture
 status: "#approved"
 date: 2026-07-26T00:00:00
 tags:
-  - adr
   - architecture
   - engineering
+  - platform
   - knowledge-base
 ---
 
-## Context
+# Engineering Platform Architecture
 
-В процессе формирования инженерной платформы Sun Decor были приняты многочисленные архитектурные решения, оформленные в виде Architecture Decision Records (ADR).
-
-Каждый ADR фиксирует отдельное решение и причины его принятия, однако не описывает инженерную систему как единое целое.
-
-По мере развития платформы возникает необходимость в документе, который позволит новым участникам проекта быстро понять:
-
-- из каких компонентов состоит инженерная платформа;
-- как распределена ответственность между компонентами;
-- каким образом взаимодействуют процессы, репозитории и инструменты;
-- каким образом развивается сама инженерная система.
-
-Отсутствие подобного документа приводит к необходимости изучать большое количество ADR для формирования общей картины.
+> [!abstract]
+> **Engineering Platform Architecture** — главный архитектурный документ инженерной платформы Sun Decor.
+>
+> Он описывает устройство инженерной системы организации, взаимосвязь её компонентов и принципы их взаимодействия.
+>
+> Детальная информация хранится в специализированных документах Knowledge Base и доступна через внутренние ссылки.
 
 ---
 
-## Decision
+# Purpose
 
-В составе Knowledge Base вводится главный архитектурный документ:
+Инженерная платформа Sun Decor существует для обеспечения **единого, воспроизводимого и масштабируемого процесса разработки цифровых продуктов**.
 
-> **Engineering Platform Architecture**
+Платформа объединяет:
 
-Документ размещается в каталоге:
+- организацию разработки;
+- инженерные стандарты;
+- процессы;
+- архитектурные решения;
+- управление знаниями;
+- AI-assisted разработку.
 
-```text
-Architecture/
+Главная цель платформы — обеспечить единый инженерный подход независимо от количества продуктов, участников проекта и используемых технологий.
+
+---
+
+# Engineering Principles
+
+Архитектура платформы основана на следующих принципах.
+
+- Single Source of Truth
+- Separation of Concerns
+- Documentation as Code
+- Process Before Automation
+- Knowledge Before Implementation
+- Repository per Product
+- AI-first Development
+- Continuous Improvement
+
+Подробное описание принципов находится в [[Vision/Engineering Principles]].
+
+---
+
+# Engineering Platform Overview
+
+```mermaid
+flowchart TD
+
+    Org["GitHub Organization"]
+
+    Project["GitHub Project"]
+
+    KB["Knowledge Base"]
+
+    Repo["Product Repositories"]
+
+    AI["AI Developer"]
+
+    Products["Digital Products"]
+
+    Org --> Project
+    Org --> KB
+    Org --> Repo
+
+    KB --> AI
+    Project --> AI
+    Repo --> AI
+
+    AI --> Products
 ```
 
-и является единой точкой входа в архитектуру инженерной платформы Sun Decor.
+---
 
-Документ описывает текущее устройство инженерной системы и служит обзором верхнего уровня.
+# Core Components
+
+## GitHub Organization
+
+Является контейнером всей инженерной деятельности организации.
+
+Подробнее:
+
+[[GitHub/GitHub Organization]]
 
 ---
 
-### Engineering Platform Architecture НЕ является ADR
+## GitHub Project
 
-Документ не фиксирует архитектурные решения.
+Единая система управления инженерной работой.
 
-Он описывает текущее состояние инженерной платформы.
+Отвечает за:
 
-Архитектурные решения продолжают оформляться исключительно в виде ADR.
+- планирование;
+- управление задачами;
+- жизненный цикл работы.
 
----
+Подробнее:
 
-### Engineering Platform Architecture НЕ является стандартом
-
-Документ не устанавливает правила разработки.
-
-Стандарты продолжают храниться в соответствующих разделах Knowledge Base.
+[[GitHub/GitHub Project]]
 
 ---
 
-### Engineering Platform Architecture НЕ является процессом
+## Knowledge Base
 
-Документ не описывает детальные процессы разработки.
+Единый источник инженерных знаний.
 
-Он содержит ссылки на документы раздела `Processes`.
+Содержит:
 
----
-
-### Engineering Platform Architecture является обзором системы
-
-Документ описывает:
-
-- назначение инженерной платформы;
-- основные инженерные принципы;
-- состав платформы;
-- взаимодействие компонентов;
-- жизненный цикл разработки;
-- поток инженерной информации;
-- поток инженерных знаний;
-- место AI Developer в инженерной системе.
-
----
-
-### Engineering Platform Architecture является центральным навигационным документом
-
-Документ активно использует Wiki Links Obsidian и содержит ссылки на:
-
-- ADR;
+- [[ADR]]
+- стандарты;
 - процессы;
-- инженерные стандарты;
-- описание GitHub;
-- продукты организации;
-- глоссарий.
-
-Он не дублирует содержание этих документов.
+- глоссарий;
+- описание продуктов.
 
 ---
 
-### Актуализация документа
+## Product Repositories
 
-При изменении архитектуры инженерной платформы документ подлежит актуализации.
+Каждый продукт располагается в собственном репозитории.
 
-Если изменение связано с принятием нового архитектурного решения, сначала создаётся новый ADR, после чего обновляется Engineering Platform Architecture.
+Каждый репозиторий имеет единственную ответственность.
 
-Таким образом сохраняется разделение между историей принятия решений и текущим состоянием системы.
+Подробнее:
+
+[[Engineering/Repository Standard]]
 
 ---
 
-## Consequences
+## AI Developer
 
-Принятие данного решения обеспечивает:
+AI Developer является исполнителем инженерных задач.
 
-- единый обзор инженерной платформы;
-- снижение порога входа для новых участников проекта;
-- сокращение необходимости изучения большого количества ADR;
-- централизованную навигацию по Knowledge Base;
-- разделение архитектурных решений, стандартов и процессов;
-- сохранение актуальной архитектурной модели инженерной системы.
+Качество результата определяется:
 
-Engineering Platform Architecture становится главным архитектурным документом Knowledge Base и отправной точкой для изучения инженерной платформы Sun Decor.
+- качеством постановки задачи;
+- полнотой инженерного контекста;
+- актуальностью инженерной документации.
+
+---
+
+# Repository Architecture
+
+```text
+Sun Decor Organization
+│
+├── .github
+│
+├── knowledge-base
+│
+├── landing-page
+│
+├── ...
+│
+└── GitHub Project
+```
+
+Ответственность компонентов определяется в:
+
+[[ADR-0006]]
+
+---
+
+# Development Lifecycle
+
+Жизненный цикл продукта состоит из следующих этапов.
+
+```text
+Idea
+    ↓
+Discovery
+    ↓
+Architecture
+    ↓
+Planning
+    ↓
+Development
+    ↓
+Review
+    ↓
+Release
+    ↓
+Maintenance
+```
+
+Подробное описание процесса находится в:
+
+[[Processes/Engineering Workflow]]
+
+---
+
+# Engineering Information Flow
+
+Инженерная информация проходит следующий путь.
+
+```text
+Discussion
+      ↓
+Discovery
+      ↓
+Issue
+      ↓
+GitHub Project
+      ↓
+Pull Request
+      ↓
+Release
+```
+
+Каждый этап имеет собственную ответственность.
+
+Подробнее:
+
+[[GitHub/Discussion]]
+
+[[GitHub/Issue]]
+
+[[GitHub/GitHub Project]]
+
+[[GitHub/Pull Request]]
+
+[[GitHub/Release]]
+
+---
+
+# Knowledge Flow
+
+Инженерные знания развиваются независимо от разработки продуктов.
+
+```text
+Experience
+      ↓
+Decision
+      ↓
+ADR
+      ↓
+Standard
+      ↓
+Template
+      ↓
+Engineering Practice
+```
+
+Таким образом знания становятся частью инженерной платформы и используются при разработке всех продуктов.
+
+---
+
+# Knowledge Base Structure
+
+```text
+README
+│
+├── Vision
+├── ADR
+├── Architecture
+├── Engineering
+├── GitHub
+├── Processes
+├── Products
+├── Glossary
+├── Templates
+└── Archive
+```
+
+Описание структуры находится в:
+
+[[README]]
+
+---
+
+# Product Architecture
+
+Каждый цифровой продукт рассматривается как самостоятельная инженерная единица.
+
+Каждый продукт обладает:
+
+- собственным репозиторием;
+- собственной документацией;
+- собственным жизненным циклом;
+- едиными инженерными стандартами организации.
+
+---
+
+# Continuous Improvement
+
+Инженерная платформа развивается непрерывно.
+
+Любое изменение проходит следующий путь:
+
+```text
+Observation
+      ↓
+Discussion
+      ↓
+ADR
+      ↓
+Standards
+      ↓
+Processes
+      ↓
+Templates
+      ↓
+Engineering Practice
+```
+
+Таким образом изменения становятся частью инженерной системы, а не отдельных продуктов.
+
+---
+
+# Related Documents
+
+## Architecture
+
+- [[ADR-0001]]
+- [[ADR-0002]]
+- [[ADR-0003]]
+- [[ADR-0004]]
+- [[ADR-0005]]
+- [[ADR-0006]]
+- [[ADR-0007]]
+- [[ADR-0008]]
+- [[ADR-0009]]
+- [[ADR-0010]]
+- [[ADR-0011]]
+- [[ADR-0012]]
+- [[ADR-0013]]
+- [[ADR-0014]]
+
+---
+
+## Engineering
+
+- [[Engineering/Definition of Done]]
+- [[Engineering/Repository Standard]]
+
+---
+
+## GitHub
+
+- [[GitHub/GitHub Project]]
+- [[GitHub/Issue]]
+- [[GitHub/Discussion]]
+- [[GitHub/Milestone]]
+- [[GitHub/Release]]
+
+---
+
+## Processes
+
+- [[Processes/Engineering Workflow]]
+
+---
+
+## Vision
+
+- [[Vision/Engineering Principles]]
+- [[Vision/Mission]]
+- [[Vision/Vision]]
+
+---
+
+# Navigation
+
+> [!tip]
+> Рекомендуемый порядок изучения Knowledge Base:
+>
+> 1. README
+> 2. Engineering Platform Architecture
+> 3. ADR
+> 4. Engineering Standards
+> 5. Processes
+> 6. GitHub
+> 7. Products
